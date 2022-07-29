@@ -21,13 +21,14 @@ JQuantsR::authorize()
 <!-- badges: start -->
 <!-- badges: end -->
 
-J-Quants API is the API that provides Japanese stock data, such as daily stock price and financial data, from Japan Exchange Group (JPX).
+[J-Quants API](https://application.jpx-jquants.com/)は、日本取引所グループ（JPX）が[J-Quants](https://jpx-jquants.com/)の取り組みの一環として提供する株式情報APIです。
 
-JQuantsR is a R package of J-Quants API wrapper.
+JQuantsRは、J-Quants APIをRから扱いやすいようにラップしたRパッケージです。
 
-## Installation
 
-You can install JQuantsR from GitHub as follows.
+## インストール
+
+以下の通り、本リポジトリからインストールしてください。
 
 ```{r, eval=FALSE}
 install.packages("remotes")
@@ -35,95 +36,73 @@ remotes::install_github("J-Quants/JQuantsR")
 ```
 
 
-## Registration of J-Quants API and getting refresh token
+## ユーザー登録
 
-Before using JQuantsR, you have to register J-Quants API from [here](https://application.jpx-jquants.com/register).
+JQuantsRを使用する前に、[J-Quants API](https://application.jpx-jquants.com/)よりユーザー登録を行ってください。
 
-Then, [login](https://application.jpx-jquants.com/) and get "refresh token".
-
-
-## Usage
-
-### Summary
-
-Each function of JQuantsR is the wrapper funtion of POST or GET method of J-Quants API, and transform fetched data to a tibble (except for `JQuantsR::authorize()`).
-
-For detailed information about parameters and returns of each function, refer to [J-Quants API Reference](https://jpx.gitbook.io/j-quants-api/api-reference) and JQuantsR help document.
-
-- `JQuantsR::authorize()`: POST method to "https://api.jpx-jquants.com/v1/token/auth_refresh"
-- `JQuantsR::get_sections()`: GET method to "https://api.jpx-jquants.com/v1/listed/sections"
-- `JQuantsR::get_daily_quotes()`: GET method to "https://api.jpx-jquants.com/v1/prices/daily_quotes"
-- `JQuantsR::get_financial_statements()`: GET method to "https://api.jpx-jquants.com/v1/fins/statements"
-- `JQuantsR::get_financial_announcement()`: GET method to "https://api.jpx-jquants.com/v1/fins/annoucement"
+ユーザー登録後、ログインしてリフレッシュトークンを取得してください。
 
 
-### Acquisition of ID token
-
-- **Before using the following functions whose name starts with "get_", you need to run `JQuantsR::authorize()` to acquire your ID token.**
-  - `JQuantsR::authorize()` returns your ID token and automatically set your ID token to a environment variable named "JQUANTSR_ID_TOKEN".
-  - So, once you run `JQuantsR::authorize()`, you don't have to set parameter `id_token` to other functions, since the default parameter of id_token is `Sys.getenv("JQUANTSR_ID_TOKEN")`.
-    - Otherwise, you have to set "id_token" parameter to the those functions manually (not recommended).
-- Validity period of refresh token is 1 week and that of ID token is 24 hours.
-  - If refresh token are expired, login from [here](https://application.jpx-jquants.com/) and get "refresh token".
-  - If ID token are expired, run `JQuantsR::authorize()` and get the latest ID token.
+## サンプルコード
 
 ```{r, eval=FALSE}
-JQuantsR::authorize(refresh_token = Sys.getenv("JQUANTSR_REFRESH_TOKEN"))
-```
+# 各Rセッションの最初にJQuantsR::authorize()を実行してください。
+# Rの環境変数"JQUANTSR_REFRESH_TOKEN"にリフレッシュトークンを設定すると、
+# JQuantsR::authorize(refresh_token = "YOUR REFRESH TOKEN")の代わりに
+# JQuantsR::authorize()で実行できます。
+JQuantsR::authorize(refresh_token = "YOUR REFRESH TOKEN")
 
-If you have set a environment variable named "JQUANTSR_REFRESH_TOKEN", you don't have to set parameter `refresh_token`, since the default parameter of refresh_token is `Sys.getenv("JQUANTSR_REFRESH_TOKEN")`. It is recommended to set your refresh token to "JQUANTSR_REFRESH_TOKEN" in `.Renviron` file.
-
-### Getting listed info
-
-```{r}
+# 引数や返り値の詳細はJ-Quants API Referenceや関数のヘルプをご参照ください。
 JQuantsR::get_info()
-```
-
-```{r}
 JQuantsR::get_info(code = "86970")
-```
-
-### Getting listed sections
-
-```{r}
 JQuantsR::get_sections()
-```
-
-### Getting daily stock price
-
-```{r}
 JQuantsR::get_daily_quotes(code = "86970")
-```
-
-```{r}
 JQuantsR::get_daily_quotes(code = "86970", from = "20220701", to = "20220715")
-```
-
-```{r}
 JQuantsR::get_daily_quotes(date = "20220701")
-```
-
-### Getting financial statements
-
-```{r}
 JQuantsR::get_financial_statements(code = "86970")
-```
-
-### Getting financial annoucement
-
-If there is no financial annoucement the next day, the return is `NULL`.
-
-```{r}
 JQuantsR::get_financial_announcement()
 ```
 
-## Additional Information
 
-- J-Quants API is beta version, so the specs of JQuantsR may be changed.
-- J-Quants takes no responsibility for any damages that might occur in using J-Quants API and JQuantsR.
+## 各関数について
+
+### 概要
+
+本パッケージに含まれる関数は以下の通りです。
+
+- `JQuantsR::authorize()`: リフレッシュトークンを用いてIDトークンを取得する
+  - POST to "https://api.jpx-jquants.com/v1/token/auth_refresh"
+- `JQuantsR::get_info()`: 最新の全上場銘柄一覧を取得する
+  - GET to "https://api.jpx-jquants.com/v1/listed/info"
+- `JQuantsR::get_sections()`: 業種一覧を取得する
+  - GET to "https://api.jpx-jquants.com/v1/listed/sections"
+- `JQuantsR::get_daily_quotes()`: 日次の株価を取得する
+  - GET to "https://api.jpx-jquants.com/v1/prices/daily_quotes"
+- `JQuantsR::get_financial_statements()`: 決算情報を取得する
+  - GET to "https://api.jpx-jquants.com/v1/fins/statements"
+- `JQuantsR::get_financial_announcement()`: 翌日の決算発表予定銘柄を取得する
+  - GET to "https://api.jpx-jquants.com/v1/fins/annoucement"
+
+`JQuantsR::authorize()`を除き、取得したデータをtibbleで返します。
+
+各関数の引数や返り値、取得できるデータの詳細は、[J-Quants API Reference](https://jpx.gitbook.io/j-quants-api/api-reference)やJQuantsRのヘルプをご参照ください。また、データの更新時間は[データの更新頻度](https://jpx.gitbook.io/j-quants-api/api-reference/data-update)をご参照ください。
+
+
+### `JQuantsR::authorize()`
+
+- 各Rセッションにおいて、最初に`JQuantsR::authorize()`を実行してIDトークンを取得する必要があります。
+  - `JQuantsR::authorize()`は、IDトークンを取得して`JQUANTSR_ID_TOKEN`という変数名の環境変数にIDトークンをセットします。
+  - 各Rセッション内で一度`JQuantsR::authorize()`を実行すれば、`id_token`を引数に取る各関数にIDトークンを渡す必要はありません。
+- リフレッシュトークンを`JQUANTSR_REFRESH_TOKEN`という変数名の環境変数に設定すれば、`JQuantsR::authorize()`の引数`refresh_token`にリフレッシュトークンを指定する必要はありません。
+  - `.Renviron`ファイルに`JQUANTSR_REFRESH_TOKEN`を記載することを推奨します。
+- リフレッシュトークンとIDトークンの有効期限はそれぞれ1週間、24時間です。
+  - リフレッシュトークンが有効期限切れの場合は、[J-Quants API](https://application.jpx-jquants.com/)にログインしてリフレッシュトークンを取得してください。
+  - IDトークンが有効期限切れの場合は、`JQuantsR::authorize()`を実行してIDトークンを取得してください。
+
 
 ## Reference
 
+- [J-Quants](https://jpx-jquants.com/)
 - [J-Quants API](https://application.jpx-jquants.com/)
-- [API Reference](https://jpx.gitbook.io/j-quants-api/api-reference)
-  - [Data Update Time](https://jpx.gitbook.io/j-quants-api/api-reference/data-update)
+- [J-Quants API Reference](https://jpx.gitbook.io/j-quants-api/api-reference)
+  - [データの更新頻度](https://jpx.gitbook.io/j-quants-api/api-reference/data-update)
