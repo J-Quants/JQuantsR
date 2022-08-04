@@ -14,6 +14,8 @@ APIをRから扱いやすいようにラップしたRパッケージです。
 
 以下の通り、本リポジトリからインストールしてください。
 
+インストールには4.0.0以上のバージョンのRが必要です。
+
 ``` r
 install.packages("remotes")
 remotes::install_github("J-Quants/JQuantsR")
@@ -83,6 +85,13 @@ Reference](https://jpx.gitbook.io/j-quants-api/api-reference)やJQuantsRのヘ�
     -   リフレッシュトークンが有効期限切れの場合は、[J-Quants
         API](https://application.jpx-jquants.com/)にログインしてリフレッシュトークンを取得してください。
     -   IDトークンが有効期限切れの場合は、`JQuantsR::authorize()`を実行してIDトークンを取得してください。
+
+## その他
+
+-   J-Quants
+    APIは現在ベータ版であり、また本パッケージは現在開発途上であるため、本パッケージの仕様は今後変更される可能性があります。
+-   バグ報告や機能追加のリクエストなどはIssuesにご投稿ください。Pull
+    Requestも歓迎です。
 
 ## Reference
 
