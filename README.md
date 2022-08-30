@@ -71,6 +71,8 @@ JQuantsR::get_financial_announcement()
 
 `JQuantsR::authorize()`を除き、取得したデータをtibbleで返します。
 
+また、`JQuantsR::market_information`というtibble形式のデータがあります。市場区分のテーブルであり、`JQuantsR::get_info()`の返り値に含まれる`MarketCode`が表す市場区分の名称を示します。
+
 各関数の引数や返り値、取得できるデータの詳細は、[J-Quants API
 Reference](https://jpx.gitbook.io/j-quants-api/api-reference)やJQuantsRのヘルプをご参照ください。また、データの更新時間は[データの更新頻度](https://jpx.gitbook.io/j-quants-api/api-reference/data-update)をご参照ください。
 
