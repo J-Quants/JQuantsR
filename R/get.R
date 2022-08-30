@@ -16,7 +16,7 @@ get_from_api <- function(resource_path, query, id_token) {
     endpoint,
     query = query,
     httr::add_headers(Authorization = as.character(glue::glue("Bearer {id_token}"))),
-    httr::user_agent(USER_AGENT)
+    httr::user_agent(default_user_agent())
   )
 
   status_code <- httr::status_code(resp)
