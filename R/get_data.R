@@ -1,5 +1,10 @@
 #' Get data from J-Quants API
 #'
+#' @description Get data from J-Quants API.
+#'
+#' When you have run "authorize()", you don't need to set "id_token" parameter,
+#' because "authorize()" set your ID token in a environment variable named "JQUANTSR_ID_TOKEN".
+#'
 #' @param code a string stock code.
 #' @param from a string the start date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.
 #' @param to a string the end date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.
@@ -7,6 +12,7 @@
 #' @param id_token a string your id_token.
 #' @return if successfully fetched data (= status code of the API is 200), a tibble of the fetched data.
 #' if not successfully (= status code of the API is not 200), none and message from the API is printed.
+#'
 #' @details parameter "code", "from", "to", "date" are required as follows.
 #' \itemize{
 #'   \item{"get_info()"}: {"code" is optional.}
@@ -14,8 +20,6 @@
 #'   \item{"get_financial_annoucements()"}: {At least one of "code" and "date" are mandatory.}
 #' }
 #' For more information, see \href{https://jpx.gitbook.io/j-quants-api/api-reference}{J-Quants API reference}.
-#'
-#' parameter "id_token": When you have run "authorize()", you don't need to set "id_token".
 #'
 #' @examples
 #' \dontrun{

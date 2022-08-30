@@ -2,22 +2,45 @@
 % Please edit documentation in R/authorize.R
 \name{authorize}
 \alias{authorize}
-\title{Get ID_token from J-Quants API and set your ID_token in a environment variable}
+\alias{authorize_refresh_token}
+\alias{authorize_id_token}
+\title{Get ID_token from J-Quants API and set your refresh token and ID token in a environment variable}
 \usage{
-authorize(refresh_token = Sys.getenv("JQUANTSR_REFRESH_TOKEN"))
+authorize(
+  mail_address = Sys.getenv("JQUANTSR_MAIL_ADDRESS"),
+  password = Sys.getenv("JQUANTSR_PASSWORD")
+)
+
+authorize_refresh_token(
+  mail_address = Sys.getenv("JQUANTSR_MAIL_ADDRESS"),
+  password = Sys.getenv("JQUANTSR_PASSWORD")
+)
+
+authorize_id_token(refresh_token = Sys.getenv("JQUANTSR_REFRESH_TOKEN"))
 }
 \arguments{
-\item{refresh_token}{a string your refresh_token.
-If you have set a environment variable named "JQUANTSR_REFRESH_TOKEN", you don't need to set "refresh_token" parameter.}
+\item{mail_address}{a string your mail address.}
+
+\item{password}{a string your password.}
 }
 \value{
-a string your id_token.
+\itemize{
+  \item{"authorize()"}: {a list your refresh token and ID token.}
+  \item{"authorize_refresh_token()"}: {a character your refresh token.}
+  \item{"authorize_id_token()"}: {a character your ID token.}
+}
 }
 \description{
-Get ID_token from J-Quants API and set your ID_token in a environment variable
+Get ID_token from J-Quants API and set your refresh token and ID token in a environment variable.
+
+Normally, you don't have to run "authorize_refresh_token()" and "authorize_id_token()".
+You only have to run "authorize()" to acquire refresh token and ID token.
+
+Your refresh token and ID token are set in enrivonment variables
+named "JQUANTSR_REFRESH_TOKEN" and JQUANTSR_ID_TOKEN".
 }
 \examples{
 \dontrun{
-authorize(your_refresh_token)
+authorize(your_mail_address, your_password)
 }
 }

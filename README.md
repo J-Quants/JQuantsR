@@ -26,16 +26,15 @@ remotes::install_github("J-Quants/JQuantsR")
 JQuantsRを使用する前に、[J-Quants
 API](https://application.jpx-jquants.com/)よりユーザー登録を行ってください。
 
-ユーザー登録後、ログインしてリフレッシュトークンを取得してください。
-
 ## サンプルコード
 
 ``` r
 # 各Rセッションの最初にJQuantsR::authorize()を実行してください。
-# Rの環境変数"JQUANTSR_REFRESH_TOKEN"にリフレッシュトークンを設定すると、
-# JQuantsR::authorize(refresh_token = "YOUR REFRESH TOKEN")の代わりに
+# Rの環境変数"JQUANTSR_MAIL_ADDRESS"と"JQUANTSR_PASSWORD"に、
+# Quants APIに登録しているメールアドレスとパスワードをそれぞれ設定しておくと、
+# JQuantsR::authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")の代わりに
 # JQuantsR::authorize()で実行できます。
-JQuantsR::authorize(refresh_token = "YOUR REFRESH TOKEN")
+JQuantsR::authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")
 
 # 引数や返り値の詳細はJ-Quants API Referenceや関数のヘルプをご参照ください。
 JQuantsR::get_info()
@@ -55,7 +54,8 @@ JQuantsR::get_financial_announcement()
 本パッケージに含まれる関数は以下の通りです。
 
 -   `JQuantsR::authorize()`:
-    リフレッシュトークンを用いてIDトークンを取得する
+    メールアドレスとパスワードを用いてリフレッシュトークンを取得後、リフレッシュトークンを用いてIDトークンを取得する
+    -   POST to “<https://api.jpx-jquants.com/v1/token/auth_user>”
     -   POST to “<https://api.jpx-jquants.com/v1/token/auth_refresh>”
 -   `JQuantsR::get_info()`: 最新の全上場銘柄一覧を取得する
     -   GET to “<https://api.jpx-jquants.com/v1/listed/info>”
@@ -76,15 +76,13 @@ Reference](https://jpx.gitbook.io/j-quants-api/api-reference)やJQuantsRのヘ�
 
 ### `JQuantsR::authorize()`
 
--   各Rセッションにおいて、最初に`JQuantsR::authorize()`を実行してIDトークンを取得する必要があります。
-    -   `JQuantsR::authorize()`は、IDトークンを取得して`JQUANTSR_ID_TOKEN`という変数名の環境変数にIDトークンをセットします。
+-   各Rセッションにおいて、最初に`JQuantsR::authorize()`を実行してリフレッシュトークンとIDトークンを取得する必要があります。
+    -   `JQuantsR::authorize()`は、リフレッシュトークンとIDトークンを取得し、`JQUANTSR_REFRESH_TOKEN`と`JQUANTSR_ID_TOKEN`という変数名の環境変数にそれぞれリフレッシュトークンとIDトークンをセットします。
     -   各Rセッション内で一度`JQuantsR::authorize()`を実行すれば、`id_token`を引数に取る各関数にIDトークンを渡す必要はありません。
--   リフレッシュトークンを`JQUANTSR_REFRESH_TOKEN`という変数名の環境変数に設定すれば、`JQuantsR::authorize()`の引数`refresh_token`にリフレッシュトークンを指定する必要はありません。
-    -   `.Renviron`ファイルに`JQUANTSR_REFRESH_TOKEN`を記載することを推奨します。
+-   メールアドレスとパスワードをそれぞれ`JQUANTSR_MAIL_ADDRESS`と`JQUANTSR_PASSWORD`という変数名の環境変数に設定すれば、`JQuantsR::authorize()`の引数`mail_address`と`password`にそれぞれメールアドレスとパスワードを指定する必要はありません。
+    -   `.Renviron`ファイルに`JQUANTSR_MAIL_ADDRESS`と`JQUANTSR_PASSWORD`を記載することを推奨します。
 -   リフレッシュトークンとIDトークンの有効期限はそれぞれ1週間、24時間です。
-    -   リフレッシュトークンが有効期限切れの場合は、[J-Quants
-        API](https://application.jpx-jquants.com/)にログインしてリフレッシュトークンを取得してください。
-    -   IDトークンが有効期限切れの場合は、`JQuantsR::authorize()`を実行してIDトークンを取得してください。
+    -   いずれかの有効期限が切れた場合、`JQuantsR::authorize()`を再度実行してください。
 
 ## その他
 

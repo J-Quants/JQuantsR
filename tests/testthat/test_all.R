@@ -3,6 +3,16 @@ test_that("authorize", {
   expect_error(authorize(), NA)
 })
 
+# authorize_refresh_token ---------------------------------------------------------------
+test_that("authorize_refresh_token", {
+  expect_error(authorize_refresh_token(), NA)
+})
+
+# authorize_id_token ---------------------------------------------------------------
+test_that("authorize_id_token", {
+  expect_error(authorize_id_token(), NA)
+})
+
 
 # get_info ----------------------------------------------------------------
 test_that("get_info", {
