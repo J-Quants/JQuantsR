@@ -3,14 +3,23 @@ test_that("authorize", {
   expect_error(authorize(), NA)
 })
 
+
 # authorize_refresh_token ---------------------------------------------------------------
 test_that("authorize_refresh_token", {
   expect_error(authorize_refresh_token(), NA)
 })
 
+
 # authorize_id_token ---------------------------------------------------------------
 test_that("authorize_id_token", {
   expect_error(authorize_id_token(), NA)
+})
+
+
+# market_information ---------------------------------------------------------------
+test_that("market_information", {
+  expect_equal(nrow(market_information), 12L)
+  expect_equal(ncol(market_information), 2L)
 })
 
 
@@ -33,7 +42,6 @@ test_that("get_daily_quotes", {
   expect_error(get_daily_quotes(date = "20220715"), NA)
   expect_error(get_daily_quotes(code = "86970", date = "20220715"), NA)
   expect_error(get_daily_quotes(code = "86970", from = "20220701", to = "20220715"), NA)
-
 })
 
 
