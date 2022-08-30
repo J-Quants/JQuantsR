@@ -2,6 +2,8 @@
 
 export("%>%")
 export(authorize)
+export(authorize_id_token)
+export(authorize_refresh_token)
 export(get_daily_quotes)
 export(get_financial_announcement)
 export(get_financial_statements)
