@@ -12,8 +12,10 @@
 #' }
 get_from_api <- function(resource_path, query, id_token) {
   endpoint <- paste0(BASE_URL, resource_path)
-  resp <- httr::GET(
+  resp <- httr::RETRY(
+    "GET",
     endpoint,
+    times = 3,
     query = query,
     httr::add_headers(Authorization = as.character(glue::glue("Bearer {id_token}"))),
     httr::user_agent(default_user_agent())
