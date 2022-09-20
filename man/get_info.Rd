@@ -4,6 +4,7 @@
 \alias{get_info}
 \alias{get_sections}
 \alias{get_daily_quotes}
+\alias{get_trades_spec}
 \alias{get_financial_statements}
 \alias{get_financial_announcement}
 \title{Get data from J-Quants API}
@@ -19,6 +20,8 @@ get_daily_quotes(
   date,
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
+
+get_trades_spec(section, from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_financial_statements(
   code,
@@ -67,6 +70,10 @@ get_info(code = "86970")
 get_sections()
 get_daily_quotes(date = "20220701")
 get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
+get_trades_spec()
+get_trades_spec(section = "TSEPrime")
+get_trades_spec(from = "20220101", to = "20220630")
+get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
 get_financial_statements(code = "86970")
 get_financial_statements(date = "20220105")
 get_financial_annoucement()

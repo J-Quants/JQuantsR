@@ -45,6 +45,15 @@ test_that("get_daily_quotes", {
 })
 
 
+# get_trades_spec ---------------------------------------------------------
+test_that("get_trades_spec", {
+  expect_error(get_trades_spec(), NA)
+  expect_error(get_trades_spec(section = "TSEPrime"), NA)
+  expect_error(get_trades_spec(from = "20220101", to = "20220630"), NA)
+  expect_error(get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630"), NA)
+})
+
+
 # get_financial_statements ------------------------------------------------
 test_that("get_financial_statements", {
   expect_error(get_financial_statements(code = "86970"), NA)

@@ -31,6 +31,10 @@
 #' get_sections()
 #' get_daily_quotes(date = "20220701")
 #' get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
+#' get_trades_spec()
+#' get_trades_spec(section = "TSEPrime")
+#' get_trades_spec(from = "20220101", to = "20220630")
+#' get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
 #' get_financial_statements(code = "86970")
 #' get_financial_statements(date = "20220105")
 #' get_financial_annoucement()
@@ -68,6 +72,22 @@ get_daily_quotes <- function(code, from, to, date, id_token = Sys.getenv("JQUANT
   }
   query <- list(code = code, from = from, to = to, date = date)
   get_from_api("/prices/daily_quotes", query, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_trades_spec <- function(section, from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(section)) {
+    section <- NULL
+  }
+  if (rlang::is_missing(from)) {
+    from <- NULL
+  }
+  if (rlang::is_missing(to)) {
+    to <- NULL
+  }
+  query <- list(section = section, from = from, to = to)
+  get_from_api("/markets/trades_spec", query, id_token)
 }
 
 #' @rdname get_info
