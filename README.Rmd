@@ -84,6 +84,8 @@ JQuantsR::get_financial_announcement()
   - GET to "https://api.jpx-jquants.com/v1/listed/sections"
 - `JQuantsR::get_daily_quotes()`: 日次の株価を取得する
   - GET to "https://api.jpx-jquants.com/v1/prices/daily_quotes"
+- `JQuantsR::get_trades_spec()`: 投資部門別売買状況（金額）を取得する
+  - GET to "https://api.jpx-jquants.com/v1/markets/trades_spec"
 - `JQuantsR::get_financial_statements()`: 決算情報を取得する
   - GET to "https://api.jpx-jquants.com/v1/fins/statements"
 - `JQuantsR::get_financial_announcement()`: 翌日の決算発表予定銘柄を取得する
