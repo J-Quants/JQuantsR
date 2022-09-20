@@ -31,8 +31,10 @@ authorize <- function(mail_address = Sys.getenv("JQUANTSR_MAIL_ADDRESS"), passwo
 #' @export
 authorize_refresh_token <- function(mail_address = Sys.getenv("JQUANTSR_MAIL_ADDRESS"), password = Sys.getenv("JQUANTSR_PASSWORD")) {
   endpoint <- paste0(BASE_URL, "/token/auth_user")
-  resp <- httr::POST(
+  resp <- httr::RETRY(
+    "POST",
     endpoint,
+    times = 3,
     body = jsonlite::toJSON(list(mailaddress = mail_address, password = password), auto_unbox = TRUE),
     httr::user_agent(default_user_agent())
   )
@@ -54,8 +56,10 @@ authorize_refresh_token <- function(mail_address = Sys.getenv("JQUANTSR_MAIL_ADD
 #' @export
 authorize_id_token <- function(refresh_token = Sys.getenv("JQUANTSR_REFRESH_TOKEN")) {
   endpoint <- paste0(BASE_URL, "/token/auth_refresh")
-  resp <- httr::POST(
+  resp <- httr::RETRY(
+    "POST",
     endpoint,
+    times = 3,
     query = list(refreshtoken = refresh_token),
     httr::user_agent(default_user_agent())
   )
