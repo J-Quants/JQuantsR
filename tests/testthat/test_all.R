@@ -45,6 +45,15 @@ test_that("get_daily_quotes", {
 })
 
 
+# get_topix ---------------------------------------------------------------
+test_that("get_topix", {
+  expect_error(get_topix(), NA)
+  expect_error(get_topix(from = "20220701"), NA)
+  expect_error(get_topix(to = "20220715"), NA)
+  expect_error(get_topix(from = "20220701", to = "20220715"), NA)
+})
+
+
 # get_trades_spec ---------------------------------------------------------
 test_that("get_trades_spec", {
   expect_error(get_trades_spec(), NA)
