@@ -17,6 +17,7 @@
 #' \itemize{
 #'   \item{"get_info()"}: {"code" is optional.}
 #'   \item{"get_daily_quotes()"}: {At least one of "code" and "date" are mandatory. If "from" and "to" parameters are used, "code" is mandatory.}
+#'   \item{"get_topix()"}: {Both of "from" and "to" are optional.}
 #'   \item{"get_financial_annoucements()"}: {At least one of "code" and "date" are mandatory.}
 #' }
 #' For more information, see \href{https://jpx.gitbook.io/j-quants-api/api-reference}{J-Quants API reference}.
@@ -31,6 +32,10 @@
 #' get_sections()
 #' get_daily_quotes(date = "20220701")
 #' get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
+#' get_topix()
+#' get_topix(from = "20220101")
+#' get_topix(to = "20220630")
+#' get_topix(from = "20220101", to = "20220630")
 #' get_trades_spec()
 #' get_trades_spec(section = "TSEPrime")
 #' get_trades_spec(from = "20220101", to = "20220630")
@@ -72,6 +77,19 @@ get_daily_quotes <- function(code, from, to, date, id_token = Sys.getenv("JQUANT
   }
   query <- list(code = code, from = from, to = to, date = date)
   get_from_api("/prices/daily_quotes", query, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_topix <- function(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(from)) {
+    from <- NULL
+  }
+  if (rlang::is_missing(to)) {
+    to <- NULL
+  }
+  query <- list(from = from, to = to)
+  get_from_api("/indices/topix", query, id_token)
 }
 
 #' @rdname get_info

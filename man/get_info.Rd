@@ -4,6 +4,7 @@
 \alias{get_info}
 \alias{get_sections}
 \alias{get_daily_quotes}
+\alias{get_topix}
 \alias{get_trades_spec}
 \alias{get_financial_statements}
 \alias{get_financial_announcement}
@@ -20,6 +21,8 @@ get_daily_quotes(
   date,
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
+
+get_topix(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_trades_spec(section, from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
@@ -57,6 +60,7 @@ parameter "code", "from", "to", "date" are required as follows.
 \itemize{
   \item{"get_info()"}: {"code" is optional.}
   \item{"get_daily_quotes()"}: {At least one of "code" and "date" are mandatory. If "from" and "to" parameters are used, "code" is mandatory.}
+  \item{"get_topix()"}: {Both of "from" and "to" are optional.}
   \item{"get_financial_annoucements()"}: {At least one of "code" and "date" are mandatory.}
 }
 For more information, see \href{https://jpx.gitbook.io/j-quants-api/api-reference}{J-Quants API reference}.
@@ -70,6 +74,10 @@ get_info(code = "86970")
 get_sections()
 get_daily_quotes(date = "20220701")
 get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
+get_topix()
+get_topix(from = "20220101")
+get_topix(to = "20220630")
+get_topix(from = "20220101", to = "20220630")
 get_trades_spec()
 get_trades_spec(section = "TSEPrime")
 get_trades_spec(from = "20220101", to = "20220630")
