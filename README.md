@@ -39,15 +39,26 @@ JQuantsR::authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWOR
 # 引数や返り値の詳細はJ-Quants API Referenceや関数のヘルプをご参照ください。
 JQuantsR::get_info()
 JQuantsR::get_info(code = "86970")
+
 JQuantsR::get_sections()
+
 JQuantsR::get_daily_quotes(code = "86970")
 JQuantsR::get_daily_quotes(code = "86970", from = "20220701", to = "20220715")
 JQuantsR::get_daily_quotes(date = "20220701")
+
+JQuantsR::get_topix()
+JQuantsR::get_topix(from = "20220101")
+JQuantsR::get_topix(to = "20220630")
+JQuantsR::get_topix(from = "20220101", to = "20220630")
+
 JQuantsR::get_trades_spec()
 JQuantsR::get_trades_spec(section = "TSEPrime")
 JQuantsR::get_trades_spec(from = "20220101", to = "20220630")
 JQuantsR::get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
+
 JQuantsR::get_financial_statements(code = "86970")
+JQuantsR::get_financial_statements(date = "20220701")
+
 JQuantsR::get_financial_announcement()
 ```
 
@@ -67,6 +78,8 @@ JQuantsR::get_financial_announcement()
     -   GET to “<https://api.jpx-jquants.com/v1/listed/sections>”
 -   `JQuantsR::get_daily_quotes()`: 日次の株価を取得する
     -   GET to “<https://api.jpx-jquants.com/v1/prices/daily_quotes>”
+-   `JQuantsR::get_topix()`: 日次のTOPIXを取得する
+    -   GET to “<https://api.jpx-jquants.com/v1/indices/topix>”
 -   `JQuantsR::get_trades_spec()`: 投資部門別売買状況（金額）を取得する
     -   GET to “<https://api.jpx-jquants.com/v1/markets/trades_spec>”
 -   `JQuantsR::get_financial_statements()`: 決算情報を取得する
