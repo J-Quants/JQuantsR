@@ -3,7 +3,7 @@
 #' @param resource_path a string resource_path.
 #' @param query a list or NULL A list must be contain query parameters.
 #' @param id_token a string id_token.
-#' @return a tibble or NULL.
+#' @return a tibble.
 #'
 #' @examples
 #' \dontrun{
