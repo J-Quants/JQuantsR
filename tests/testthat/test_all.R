@@ -16,13 +16,6 @@ test_that("authorize_id_token", {
 })
 
 
-# market_information ---------------------------------------------------------------
-test_that("market_information", {
-  expect_equal(nrow(market_information), 12L)
-  expect_equal(ncol(market_information), 2L)
-})
-
-
 # get_info ----------------------------------------------------------------
 test_that("get_info", {
   expect_error(get_info(), NA)
