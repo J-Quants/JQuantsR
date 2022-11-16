@@ -27,6 +27,8 @@ test_that("market_information", {
 test_that("get_info", {
   expect_error(get_info(), NA)
   expect_error(get_info(code = "86970"), NA)
+  expect_error(get_info(date = "20220701"), NA)
+  expect_error(get_info(code = "86970", date = "20220701"), NA)
 })
 
 

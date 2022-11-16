@@ -10,7 +10,7 @@
 \alias{get_financial_announcement}
 \title{Get data from J-Quants API}
 \usage{
-get_info(code, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+get_info(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_sections(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
@@ -37,13 +37,13 @@ get_financial_announcement(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 \arguments{
 \item{code}{a string stock code.}
 
+\item{date}{a string the date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.}
+
 \item{id_token}{a string your id_token.}
 
 \item{from}{a string the start date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.}
 
 \item{to}{a string the end date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.}
-
-\item{date}{a string the date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.}
 }
 \value{
 if successfully fetched data (= status code of the API is 200), a tibble of the fetched data.
@@ -58,7 +58,7 @@ because "authorize()" set your ID token in a environment variable named "JQUANTS
 \details{
 parameter "code", "from", "to", "date" are required as follows.
 \itemize{
-  \item{"get_info()"}: {"code" is optional.}
+  \item{"get_info()"}: {Both of "code" and "date" are optional.}
   \item{"get_daily_quotes()"}: {At least one of "code" and "date" are mandatory. If "from" and "to" parameters are used, "code" is mandatory.}
   \item{"get_topix()"}: {Both of "from" and "to" are optional.}
   \item{"get_financial_annoucements()"}: {At least one of "code" and "date" are mandatory.}
@@ -71,6 +71,8 @@ For more information, see \href{https://jpx.gitbook.io/j-quants-api/api-referenc
 authorize(refresh_token = YOUR_REFRESH_TOKEN)
 get_info()
 get_info(code = "86970")
+get_info(date = "20220701")
+get_info(code = "86970", date = "20220701")
 get_sections()
 get_daily_quotes(date = "20220701")
 get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
