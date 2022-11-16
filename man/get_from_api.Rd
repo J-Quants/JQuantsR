@@ -14,7 +14,7 @@ get_from_api(resource_path, query, id_token)
 \item{id_token}{a string id_token.}
 }
 \value{
-a tibble or NULL.
+a tibble.
 }
 \description{
 Get data from J-Quants API and return the data

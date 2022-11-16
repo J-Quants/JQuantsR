@@ -11,7 +11,7 @@
 #' @param date a string the date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.
 #' @param id_token a string your id_token.
 #' @return if successfully fetched data (= status code of the API is 200), a tibble of the fetched data.
-#' if not successfully (= status code of the API is not 200), none and message from the API is printed.
+#' if not successfully (= status code of the API is not 200), message from the API is printed.
 #'
 #' @details parameter "code", "from", "to", "date" are required as follows.
 #' \itemize{

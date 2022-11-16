@@ -47,7 +47,7 @@ get_financial_announcement(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 }
 \value{
 if successfully fetched data (= status code of the API is 200), a tibble of the fetched data.
-if not successfully (= status code of the API is not 200), none and message from the API is printed.
+if not successfully (= status code of the API is not 200), message from the API is printed.
 }
 \description{
 Get data from J-Quants API.

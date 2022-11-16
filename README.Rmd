@@ -90,7 +90,7 @@ JQuantsR::get_financial_announcement()
 - `JQuantsR::authorize()`: メールアドレスとパスワードを用いてリフレッシュトークンを取得後、リフレッシュトークンを用いてIDトークンを取得する
   - POST to "https://api.jpx-jquants.com/v1/token/auth_user"
   - POST to "https://api.jpx-jquants.com/v1/token/auth_refresh"
-- `JQuantsR::get_info()`: 最新の全上場銘柄一覧を取得する
+- `JQuantsR::get_info()`: 最新の、あるいは指定した日付における上場銘柄一覧を取得する
   - GET to "https://api.jpx-jquants.com/v1/listed/info"
 - `JQuantsR::get_sections()`: 業種一覧を取得する
   - GET to "https://api.jpx-jquants.com/v1/listed/sections"
