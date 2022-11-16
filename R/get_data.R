@@ -15,7 +15,7 @@
 #'
 #' @details parameter "code", "from", "to", "date" are required as follows.
 #' \itemize{
-#'   \item{"get_info()"}: {"code" is optional.}
+#'   \item{"get_info()"}: {Both of "code" and "date" are optional.}
 #'   \item{"get_daily_quotes()"}: {At least one of "code" and "date" are mandatory. If "from" and "to" parameters are used, "code" is mandatory.}
 #'   \item{"get_topix()"}: {Both of "from" and "to" are optional.}
 #'   \item{"get_financial_annoucements()"}: {At least one of "code" and "date" are mandatory.}
@@ -29,6 +29,8 @@
 #' authorize(refresh_token = YOUR_REFRESH_TOKEN)
 #' get_info()
 #' get_info(code = "86970")
+#' get_info(date = "20220701")
+#' get_info(code = "86970", date = "20220701")
 #' get_sections()
 #' get_daily_quotes(date = "20220701")
 #' get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
@@ -45,11 +47,14 @@
 #' get_financial_annoucement()
 #' }
 #' @export
-get_info <- function(code, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+get_info <- function(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
   if (rlang::is_missing(code)) {
     code <- NULL
   }
-  query <- list(code = code)
+  if (rlang::is_missing(date)) {
+    date <- NULL
+  }
+  query <- list(code = code, date = date)
   get_from_api("/listed/info", query, id_token)
 }
 
