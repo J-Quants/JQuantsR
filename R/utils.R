@@ -1,4 +1,4 @@
-BASE_URL <- "https://api.jpx-jquants.com/v1"
+BASE_URL <- "https://api.jquants.com/v1"
 
 default_user_agent <- function() {
   versions <- c(
