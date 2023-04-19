@@ -3,7 +3,7 @@
 #' @param resource_path a string resource_path.
 #' @param query a list or NULL A list must be contain query parameters.
 #' @param id_token a string id_token.
-#' @return a tibble.
+#' @return a tibble
 #'
 #' @examples
 #' \dontrun{
@@ -30,6 +30,12 @@ get_from_api <- function(resource_path, query, id_token) {
 
   res <- content %>%
     magrittr::extract2(1) %>%
-    dplyr::bind_rows()
+    purrr::map(function(x) {
+      purrr::map(x, function(y) {
+        ifelse(is.null(y), NA, y)
+      })
+    }) %>%
+    data.table::rbindlist() %>%
+    tibble::as_tibble()
   return(res)
 }

@@ -2,17 +2,20 @@
 % Please edit documentation in R/get_data.R
 \name{get_info}
 \alias{get_info}
-\alias{get_sections}
 \alias{get_daily_quotes}
-\alias{get_topix}
+\alias{get_prices_am}
 \alias{get_trades_spec}
+\alias{get_weekly_margin_interest}
+\alias{get_short_selling}
+\alias{get_breakdown}
+\alias{get_topix}
 \alias{get_financial_statements}
+\alias{get_financial_dividend}
 \alias{get_financial_announcement}
+\alias{get_index_option}
 \title{Get data from J-Quants API}
 \usage{
 get_info(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
-
-get_sections(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_daily_quotes(
   code,
@@ -22,9 +25,29 @@ get_daily_quotes(
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
 
-get_topix(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+get_prices_am(code, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_trades_spec(section, from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+
+get_weekly_margin_interest(
+  code,
+  from,
+  to,
+  date,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
+
+get_short_selling(
+  sector33code,
+  from,
+  to,
+  date,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
+
+get_breakdown(code, from, to, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+
+get_topix(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_financial_statements(
   code,
@@ -32,7 +55,17 @@ get_financial_statements(
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
 
+get_financial_dividend(
+  code,
+  from,
+  to,
+  date,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
+
 get_financial_announcement(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+
+get_index_option(date = date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 }
 \arguments{
 \item{code}{a string stock code.}
@@ -63,29 +96,56 @@ parameter "code", "from", "to", "date" are required as follows.
   \item{"get_topix()"}: {Both of "from" and "to" are optional.}
   \item{"get_financial_annoucements()"}: {At least one of "code" and "date" are mandatory.}
 }
-For more information, see \href{https://jpx.gitbook.io/j-quants-api/api-reference}{J-Quants API reference}.
+For more information, see \href{https://jpx.gitbook.io/j-quants-ja/api-reference}{J-Quants API reference}.
 }
 \examples{
 \dontrun{
 # you must have done "authorize()" before running "get_info" or other functions,
 authorize(refresh_token = YOUR_REFRESH_TOKEN)
+
 get_info()
 get_info(code = "86970")
 get_info(date = "20220701")
 get_info(code = "86970", date = "20220701")
-get_sections()
+
+get_daily_quotes(code = "86970")
 get_daily_quotes(date = "20220701")
 get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
+
+get_prices_am()
+get_prices_am(code = "86970")
+
+get_trades_spec(section = "TSEPrime")
+get_trades_spec(from = "20220101", to = "20220630")
+get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
+
+get_weekly_margin_interest(code = "86970")
+get_weekly_margin_interest(date = "20220701")
+get_weekly_margin_interest(code = "86970", from = "20220101", to = "20220630")
+
+get_short_selling(sector33code = "0050")
+get_short_selling(date = "20220701")
+get_short_selling(sector33code = "0050", from = "20220101", to = "20220630")
+
+get_breakdown(code = "86970")
+get_breakdown(date = "20220701")
+get_breakdown(code = "86970", from = "20220101", to = "20220630")
+
 get_topix()
 get_topix(from = "20220101")
 get_topix(to = "20220630")
 get_topix(from = "20220101", to = "20220630")
-get_trades_spec()
-get_trades_spec(section = "TSEPrime")
-get_trades_spec(from = "20220101", to = "20220630")
-get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
+
 get_financial_statements(code = "86970")
 get_financial_statements(date = "20220105")
-get_financial_annoucement()
+get_financial_statements(code = "86970", date = "20220105")
+
+get_financial_dividend(code = "86970")
+get_financial_dividend(date = "20220701")
+get_financial_dividend(code = "86970", from = "20220101", to = "20220630")
+
+get_financial_announcement()
+
+get_index_option(date = "20220701")
 }
 }
