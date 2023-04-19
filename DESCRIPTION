@@ -9,6 +9,7 @@ Depends: R (>= 4.0.0)
 Imports: 
     dplyr (>= 1.0.0),
     purrr,
+    stringr,
     tibble,
     magrittr,
     rlang,
