@@ -16,6 +16,8 @@ APIをRから扱いやすいようにラップしたRパッケージです。
 
 インストールには4.0.0以上のバージョンのRが必要です。
 
+2023年4月リリースの有償版を使用するためには、以下のコマンドで1.0.0以上のバージョンのJQuantsRにアップデートしてください。
+
 ``` r
 install.packages("remotes")
 remotes::install_github("J-Quants/JQuantsR")
@@ -28,13 +30,17 @@ API](https://jpx-jquants.com/)よりユーザー登録を行ってください�
 
 ## サンプルコード
 
+プレミアムプランに登録していれば全ての関数から値を取得できますが、登録しているプランによっては値が取得できない関数があります。
+
 ``` r
+library(JQuantsR)
+
 # 各Rセッションの最初にJQuantsR::authorize()を実行してください。
 # Rの環境変数"JQUANTSR_MAIL_ADDRESS"と"JQUANTSR_PASSWORD"に、
 # Quants APIに登録しているメールアドレスとパスワードをそれぞれ設定しておくと、
 # JQuantsR::authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")の代わりに
 # JQuantsR::authorize()で実行できます。
-JQuantsR::authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")
+authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")
 
 # 引数や返り値の詳細はJ-Quants API Referenceや関数のヘルプをご参照ください。
 get_info()
