@@ -56,6 +56,13 @@
 #' get_breakdown(date = "20220701")
 #' get_breakdown(code = "86970", from = "20220101", to = "20220630")
 #'
+#' get_trading_calendar()
+#' get_trading_calendar(holidaydivision = "1")
+#' get_trading_calendar(holidaydivision = "1", from = "20220101")
+#' get_trading_calendar(holidaydivision = "1", to = "20220630")
+#' get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
+#' get_trading_calendar(from = "20220101", to = "20220630")
+#'
 #' get_topix()
 #' get_topix(from = "20220101")
 #' get_topix(to = "20220630")
@@ -185,6 +192,22 @@ get_breakdown <- function(code, from, to, date, id_token = Sys.getenv("JQUANTSR_
   }
   query <- list(code = code, from = from, to = to, date = date)
   get_from_api("/markets/breakdown", query, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_trading_calendar <- function(holidaydivision, from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(holidaydivision)) {
+    holidaydivision <- NULL
+  }
+  if (rlang::is_missing(from)) {
+    from <- NULL
+  }
+  if (rlang::is_missing(to)) {
+    to <- NULL
+  }
+  query <- list(holidaydivision = holidaydivision, from = from, to = to)
+  get_from_api("/markets/trading_calendar", query, id_token)
 }
 
 #' @rdname get_info
