@@ -77,6 +77,17 @@ test_that("get_breakdown", {
 })
 
 
+# get_trading_calendar ---------------------------------------------------------------
+test_that("get_trading_calendar", {
+  expect_error(get_trading_calendar(), NA)
+  expect_error(get_trading_calendar(holidaydivision = "1"), NA)
+  expect_error(get_trading_calendar(holidaydivision = "1", from = "20220101"), NA)
+  expect_error(get_trading_calendar(holidaydivision = "1", to = "20220630"), NA)
+  expect_error(get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630"), NA)
+  expect_error(get_trading_calendar(from = "20220101", to = "20220630"), NA)
+})
+
+
 # get_topix ---------------------------------------------------------------
 test_that("get_topix", {
   expect_error(get_topix(), NA)
