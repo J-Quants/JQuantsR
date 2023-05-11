@@ -71,6 +71,13 @@ get_breakdown(code = "86970")
 get_breakdown(date = "20220701")
 get_breakdown(code = "86970", from = "20220101", to = "20220630")
 
+get_trading_calendar()
+get_trading_calendar(holidaydivision = "1")
+get_trading_calendar(holidaydivision = "1", from = "20220101")
+get_trading_calendar(holidaydivision = "1", to = "20220630")
+get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
+get_trading_calendar(from = "20220101", to = "20220630")
+
 get_topix()
 get_topix(from = "20220101")
 get_topix(to = "20220630")
@@ -113,7 +120,9 @@ get_index_option(date = "20220701")
 - `JQuantsR::get_short_selling()`: 業種別空売り比率を取得する
   - GET to “<https://api.jquants.com/v1/markets/short_selling>”
 - `JQuantsR::get_breakdown()`: 売買内訳データを取得する
-  - GET to “<https://api.jquants.com/v1/markets/get_breakdown>”
+  - GET to “<https://api.jquants.com/v1/markets/breakdown>”
+- `JQuantsR::get_trading_calendar()`: 取引カレンダーを取得する
+  - GET to “<https://api.jquants.com/v1/markets/trading_calendar>”
 - `JQuantsR::get_topix()`: 日次のTOPIXを取得する
   - GET to “<https://api.jquants.com/v1/indices/topix>”
 - `JQuantsR::get_financial_statements()`: 決算情報を取得する

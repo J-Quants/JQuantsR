@@ -8,6 +8,7 @@
 \alias{get_weekly_margin_interest}
 \alias{get_short_selling}
 \alias{get_breakdown}
+\alias{get_trading_calendar}
 \alias{get_topix}
 \alias{get_financial_statements}
 \alias{get_financial_dividend}
@@ -46,6 +47,13 @@ get_short_selling(
 )
 
 get_breakdown(code, from, to, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+
+get_trading_calendar(
+  holidaydivision,
+  from,
+  to,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
 
 get_topix(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
@@ -130,6 +138,13 @@ get_short_selling(sector33code = "0050", from = "20220101", to = "20220630")
 get_breakdown(code = "86970")
 get_breakdown(date = "20220701")
 get_breakdown(code = "86970", from = "20220101", to = "20220630")
+
+get_trading_calendar()
+get_trading_calendar(holidaydivision = "1")
+get_trading_calendar(holidaydivision = "1", from = "20220101")
+get_trading_calendar(holidaydivision = "1", to = "20220630")
+get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
+get_trading_calendar(from = "20220101", to = "20220630")
 
 get_topix()
 get_topix(from = "20220101")
