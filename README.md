@@ -120,7 +120,7 @@ get_index_option(date = "20220701")
 - `JQuantsR::get_short_selling()`: 業種別空売り比率を取得する
   - GET to “<https://api.jquants.com/v1/markets/short_selling>”
 - `JQuantsR::get_breakdown()`: 売買内訳データを取得する
-  - GET to “<https://api.jquants.com/v1/markets/get_breakdown>”
+  - GET to “<https://api.jquants.com/v1/markets/breakdown>”
 - `JQuantsR::get_trading_calendar()`: 取引カレンダーを取得する
   - GET to “<https://api.jquants.com/v1/markets/trading_calendar>”
 - `JQuantsR::get_topix()`: 日次のTOPIXを取得する
