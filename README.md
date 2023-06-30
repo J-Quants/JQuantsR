@@ -55,6 +55,7 @@ get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
 get_prices_am()
 get_prices_am(code = "86970")
 
+get_trades_spec()
 get_trades_spec(section = "TSEPrime")
 get_trades_spec(from = "20220101", to = "20220630")
 get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
