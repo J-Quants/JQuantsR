@@ -50,6 +50,8 @@ test_that("get_trades_spec", {
   expect_error(get_trades_spec(to = "20081231"), NA)
   expect_error(get_trades_spec(section = "TSEPrime", from = "20220101"), NA)
   expect_error(get_trades_spec(section = "TSEPrime", to = "20220630"), NA)
+  # pagination
+  expect_equal(nrow(get_trades_spec(from = "20080116", to="20230630")), 3682L)
 })
 
 
@@ -102,6 +104,8 @@ test_that("get_financial_statements", {
   expect_error(get_financial_statements(code = "86970"), NA)
   expect_error(get_financial_statements(date = "20220715"), NA)
   expect_error(get_financial_statements(code = "86970", date = "20220715"), NA)
+  # pagination
+  expect_equal(nrow(get_financial_statements(date = "20230512")), 1166L)
 })
 
 

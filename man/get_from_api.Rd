@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_from_api.R
 \name{get_from_api}
 \alias{get_from_api}
-\title{Get data from J-Quants API and return the data}
+\title{Get data from API and return the content}
 \usage{
 get_from_api(resource_path, query, id_token)
 }
@@ -14,10 +14,10 @@ get_from_api(resource_path, query, id_token)
 \item{id_token}{a string id_token.}
 }
 \value{
-a tibble
+a httr::content() object
 }
 \description{
-Get data from J-Quants API and return the data
+Get data from API and return the content
 }
 \examples{
 \dontrun{
