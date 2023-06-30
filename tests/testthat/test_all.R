@@ -43,6 +43,7 @@ test_that("get_prices_am", {
 
 # get_trades_spec ---------------------------------------------------------
 test_that("get_trades_spec", {
+  expect_error(get_trades_spec(), NA)
   expect_error(get_trades_spec(section = "TSEPrime"), NA)
   expect_error(get_trades_spec(from = "20220101", to = "20220630"), NA)
   expect_error(get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630"), NA)
