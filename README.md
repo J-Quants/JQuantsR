@@ -88,6 +88,10 @@ get_financial_statements(code = "86970")
 get_financial_statements(date = "20220105")
 get_financial_statements(code = "86970", date = "20220105")
 
+get_financial_details(code = "86970")
+get_financial_details(date = "20220127")
+get_financial_details(code = "86970", date = "20220127")
+
 get_financial_dividend(code = "86970")
 get_financial_dividend(date = "20220701")
 get_financial_dividend(code = "86970", from = "20220101", to = "20220630")
@@ -128,6 +132,8 @@ get_index_option(date = "20220701")
   - GET to “<https://api.jquants.com/v1/indices/topix>”
 - `JQuantsR::get_financial_statements()`: 決算情報を取得する
   - GET to “<https://api.jquants.com/v1/fins/statements>”
+- `JQuantsR::get_financial_details()`: 財務諸表（BS/PL）を取得する
+  - GET to “<https://api.jquants.com/v1/fins/fs_details>”
 - `JQuantsR::get_financial_dividend()`: 配当金情報を取得する
   - GET to “<https://api.jquants.com/v1/fins/dividend>”
 - `JQuantsR::get_financial_announcement()`:

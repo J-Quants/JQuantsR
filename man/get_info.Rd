@@ -11,6 +11,7 @@
 \alias{get_trading_calendar}
 \alias{get_topix}
 \alias{get_financial_statements}
+\alias{get_financial_details}
 \alias{get_financial_dividend}
 \alias{get_financial_announcement}
 \alias{get_index_option}
@@ -62,6 +63,8 @@ get_financial_statements(
   date,
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
+
+get_financial_details(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_financial_dividend(
   code,
@@ -154,6 +157,10 @@ get_topix(from = "20220101", to = "20220630")
 get_financial_statements(code = "86970")
 get_financial_statements(date = "20220105")
 get_financial_statements(code = "86970", date = "20220105")
+
+get_financial_details(code = "86970")
+get_financial_details(date = "20220127")
+get_financial_details(code = "86970", date = "20220127")
 
 get_financial_dividend(code = "86970")
 get_financial_dividend(date = "20220701")
