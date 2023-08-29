@@ -110,6 +110,16 @@ test_that("get_financial_statements", {
 })
 
 
+# get_financial_details ---------------------------------------------------
+test_that("get_financial_details", {
+  expect_error(get_financial_details(code = "86970"), NA)
+  expect_error(get_financial_details(date = "20220715"), NA)
+  expect_error(get_financial_details(code = "86970", date = "20220715"), NA)
+  # pagination
+  expect_equal(nrow(get_financial_details(date = "20230512")), 114385L)
+})
+
+
 # get_financial_dividend ------------------------------------------------
 test_that("get_financial_dividend", {
   expect_error(get_financial_dividend(code = "86970"), NA)

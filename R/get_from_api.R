@@ -45,14 +45,30 @@ get_from_api <- function(resource_path, query, id_token) {
 #' }
 extract_from_content <- function(content, data_key_name, pagination_key_name) {
   data <- content %>%
-    magrittr::extract2(data_key_name) %>%
-    purrr::map(function(x) {
-      purrr::map(x, function(y) {
-        ifelse(is.null(y), NA, y)
-      })
-    }) %>%
-    data.table::rbindlist() %>%
-    tibble::as_tibble()
+    magrittr::extract2(data_key_name)
+
+  if (data_key_name == "fs_details") {
+    if (length(data) == 0L) {
+      return(tibble())
+    }
+    data <- data %>%
+      dplyr::bind_rows() %>%
+      tibble::as_tibble() %>%
+      mutate(
+        FinancialStatementName = names(FinancialStatement),
+        FinancialStatementValue = flatten_chr(FinancialStatement)
+      ) %>%
+      select(-FinancialStatement)
+  } else {
+    data <- data %>%
+      purrr::map(function(x) {
+        purrr::map(x, function(y) {
+          ifelse(is.null(y), NA, y)
+        })
+      }) %>%
+      data.table::rbindlist() %>%
+      tibble::as_tibble()
+  }
   pagination_key <- content %>%
     magrittr::extract2(pagination_key_name)
   return(list(data=data, pagination_key=pagination_key))

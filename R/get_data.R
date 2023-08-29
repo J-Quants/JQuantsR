@@ -72,6 +72,10 @@
 #' get_financial_statements(date = "20220105")
 #' get_financial_statements(code = "86970", date = "20220105")
 #'
+#' get_financial_details(code = "86970")
+#' get_financial_details(date = "20220127")
+#' get_financial_details(code = "86970", date = "20220127")
+#'
 #' get_financial_dividend(code = "86970")
 #' get_financial_dividend(date = "20220701")
 #' get_financial_dividend(code = "86970", from = "20220101", to = "20220630")
@@ -234,6 +238,19 @@ get_financial_statements <- function(code, date, id_token = Sys.getenv("JQUANTSR
   }
   query <- list(code = code, date = date)
   get_full_data("/fins/statements", query, "statements", "pagination_key", TRUE, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_financial_details <- function(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(code)) {
+    code <- NULL
+  }
+  if (rlang::is_missing(date)) {
+    date <- NULL
+  }
+  query <- list(code = code, date = date)
+  get_full_data("/fins/fs_details", query, "fs_details", "pagination_key", TRUE, id_token)
 }
 
 #' @rdname get_info
