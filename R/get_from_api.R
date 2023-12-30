@@ -44,32 +44,32 @@ get_from_api <- function(resource_path, query, id_token) {
 #' extract_from_content(content, "daily_quotes", "pagination_key")
 #' }
 extract_from_content <- function(content, data_key_name, pagination_key_name) {
-  data <- content %>%
+  data <- content |>
     magrittr::extract2(data_key_name)
 
   if (data_key_name == "fs_details") {
     if (length(data) == 0L) {
       return(tibble::tibble())
     }
-    data <- data %>%
-      dplyr::bind_rows() %>%
-      tibble::as_tibble() %>%
+    data <- data |>
+      dplyr::bind_rows() |>
+      tibble::as_tibble() |>
       dplyr::mutate(
         FinancialStatementName = names(FinancialStatement),
         FinancialStatementValue = purrr::flatten_chr(FinancialStatement)
-      ) %>%
+      ) |>
       dplyr::select(-FinancialStatement)
   } else {
-    data <- data %>%
+    data <- data |>
       purrr::map(function(x) {
         purrr::map(x, function(y) {
           ifelse(is.null(y), NA, y)
         })
-      }) %>%
-      data.table::rbindlist() %>%
+      }) |>
+      data.table::rbindlist() |>
       tibble::as_tibble()
   }
-  pagination_key <- content %>%
+  pagination_key <- content |>
     magrittr::extract2(pagination_key_name)
   return(list(data=data, pagination_key=pagination_key))
 }
