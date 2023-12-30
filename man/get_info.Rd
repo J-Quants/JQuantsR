@@ -9,6 +9,7 @@
 \alias{get_short_selling}
 \alias{get_breakdown}
 \alias{get_trading_calendar}
+\alias{get_indices}
 \alias{get_topix}
 \alias{get_financial_statements}
 \alias{get_financial_details}
@@ -55,6 +56,8 @@ get_trading_calendar(
   to,
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
+
+get_indices(code, from, to, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
 get_topix(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
@@ -148,6 +151,10 @@ get_trading_calendar(holidaydivision = "1", from = "20220101")
 get_trading_calendar(holidaydivision = "1", to = "20220630")
 get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
 get_trading_calendar(from = "20220101", to = "20220630")
+
+get_indices(code = "0000")
+get_indices(date = "20220701")
+get_indices(code = "0000", from = "20220101", to = "20220630")
 
 get_topix()
 get_topix(from = "20220101")

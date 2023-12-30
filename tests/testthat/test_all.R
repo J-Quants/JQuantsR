@@ -91,6 +91,15 @@ test_that("get_trading_calendar", {
 })
 
 
+# get_indices --------------------------------------------------------
+test_that("get_indices", {
+  expect_error(get_daily_quotes(code = "0000"), NA)
+  expect_error(get_daily_quotes(date = "20220715"), NA)
+  expect_error(get_daily_quotes(code = "0000", date = "20220715"), NA)
+  expect_error(get_daily_quotes(code = "0000", from = "20220701", to = "20220715"), NA)
+})
+
+
 # get_topix ---------------------------------------------------------------
 test_that("get_topix", {
   expect_error(get_topix(), NA)

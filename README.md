@@ -10,7 +10,7 @@ JQuantsRは、J-QuantsをRから扱いやすいようにラップしたRパッ�
 
 ## インストール
 
-以下の通り、本リポジトリからインストールしてください。インストールには4.0.0以上のバージョンのRが必要です。
+以下の通り、本リポジトリからインストールしてください。インストールには4.1以上のバージョンのRが必要です。
 
 ``` r
 install.packages("remotes")
@@ -34,55 +34,40 @@ authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")
 get_info()
 get_info(code = "86970")
 get_info(date = "20220701")
-get_info(code = "86970", date = "20220701")
 
 get_daily_quotes(code = "86970")
 get_daily_quotes(date = "20220701")
-get_daily_quotes(code = "86970", from = "20220101", to = "20220630")
 
 get_prices_am()
-get_prices_am(code = "86970")
 
 get_trades_spec()
 get_trades_spec(section = "TSEPrime")
 get_trades_spec(from = "20220101", to = "20220630")
-get_trades_spec(section = "TSEPrime", from = "20220101", to = "20220630")
 
 get_weekly_margin_interest(code = "86970")
 get_weekly_margin_interest(date = "20220701")
-get_weekly_margin_interest(code = "86970", from = "20220101", to = "20220630")
 
 get_short_selling(sector33code = "0050")
 get_short_selling(date = "20220701")
-get_short_selling(sector33code = "0050", from = "20220101", to = "20220630")
 
 get_breakdown(code = "86970")
 get_breakdown(date = "20220701")
-get_breakdown(code = "86970", from = "20220101", to = "20220630")
 
 get_trading_calendar()
-get_trading_calendar(holidaydivision = "1")
-get_trading_calendar(holidaydivision = "1", from = "20220101")
-get_trading_calendar(holidaydivision = "1", to = "20220630")
-get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
-get_trading_calendar(from = "20220101", to = "20220630")
+
+get_indices(code = "0000")
+get_indices(date = "20220701")
 
 get_topix()
-get_topix(from = "20220101")
-get_topix(to = "20220630")
-get_topix(from = "20220101", to = "20220630")
 
 get_financial_statements(code = "86970")
 get_financial_statements(date = "20220105")
-get_financial_statements(code = "86970", date = "20220105")
 
 get_financial_details(code = "86970")
 get_financial_details(date = "20220127")
-get_financial_details(code = "86970", date = "20220127")
 
 get_financial_dividend(code = "86970")
 get_financial_dividend(date = "20220701")
-get_financial_dividend(code = "86970", from = "20220101", to = "20220630")
 
 get_financial_annoucement()
 
@@ -123,6 +108,8 @@ Reference](https://jpx.gitbook.io/j-quants-ja/api-reference)をご参照くだ�
   - `get_topix()`: TOPIX四本値を取得する
     - \[GET\] /indices/topix
 - Standardプラン以上
+  - `get_indices()`: 指数四本値を取得する
+    - \[GET\] /indices
   - `get_index_option()`: オプション四本値を取得する
     - \[GET\] /option/index_option
   - `get_weekly_margin_interest()`: 信用取引週末残高を取得する
