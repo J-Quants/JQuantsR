@@ -63,6 +63,10 @@
 #' get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
 #' get_trading_calendar(from = "20220101", to = "20220630")
 #'
+#' get_indices(code = "0000")
+#' get_indices(date = "20220701")
+#' get_indices(code = "0000", from = "20220101", to = "20220630")
+#'
 #' get_topix()
 #' get_topix(from = "20220101")
 #' get_topix(to = "20220630")
@@ -212,6 +216,25 @@ get_trading_calendar <- function(holidaydivision, from, to, id_token = Sys.geten
   }
   query <- list(holidaydivision = holidaydivision, from = from, to = to)
   get_full_data("/markets/trading_calendar", query, "trading_calendar", "pagination_key", FALSE, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_indices <- function(code, from, to, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(code)) {
+    code <- NULL
+  }
+  if (rlang::is_missing(from)) {
+    from <- NULL
+  }
+  if (rlang::is_missing(to)) {
+    to <- NULL
+  }
+  if (rlang::is_missing(date)) {
+    date <- NULL
+  }
+  query <- list(code = code, from = from, to = to, date = date)
+  get_full_data("/indices", query, "indices", "pagination_key", TRUE, id_token)
 }
 
 #' @rdname get_info

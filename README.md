@@ -67,6 +67,10 @@ get_trading_calendar(holidaydivision = "1", to = "20220630")
 get_trading_calendar(holidaydivision = "1", from = "20220101", to = "20220630")
 get_trading_calendar(from = "20220101", to = "20220630")
 
+get_indices(code = "0000")
+get_indices(date = "20220701")
+get_indices(code = "0000", from = "20220101", to = "20220630")
+
 get_topix()
 get_topix(from = "20220101")
 get_topix(to = "20220630")
@@ -123,6 +127,8 @@ Reference](https://jpx.gitbook.io/j-quants-ja/api-reference)をご参照くだ�
   - `get_topix()`: TOPIX四本値を取得する
     - \[GET\] /indices/topix
 - Standardプラン以上
+  - `get_indices()`: 指数四本値を取得する
+    - \[GET\] /indices
   - `get_index_option()`: オプション四本値を取得する
     - \[GET\] /option/index_option
   - `get_weekly_margin_interest()`: 信用取引週末残高を取得する
