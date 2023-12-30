@@ -49,16 +49,16 @@ extract_from_content <- function(content, data_key_name, pagination_key_name) {
 
   if (data_key_name == "fs_details") {
     if (length(data) == 0L) {
-      return(tibble())
+      return(tibble::tibble())
     }
     data <- data %>%
       dplyr::bind_rows() %>%
       tibble::as_tibble() %>%
-      mutate(
+      dplyr::mutate(
         FinancialStatementName = names(FinancialStatement),
-        FinancialStatementValue = flatten_chr(FinancialStatement)
+        FinancialStatementValue = purrr::flatten_chr(FinancialStatement)
       ) %>%
-      select(-FinancialStatement)
+      dplyr::select(-FinancialStatement)
   } else {
     data <- data %>%
       purrr::map(function(x) {
