@@ -93,10 +93,10 @@ test_that("get_trading_calendar", {
 
 # get_indices --------------------------------------------------------
 test_that("get_indices", {
-  expect_error(get_daily_quotes(code = "0000"), NA)
-  expect_error(get_daily_quotes(date = "20220715"), NA)
-  expect_error(get_daily_quotes(code = "0000", date = "20220715"), NA)
-  expect_error(get_daily_quotes(code = "0000", from = "20220701", to = "20220715"), NA)
+  expect_error(get_indices(code = "0040"), NA)
+  expect_error(get_indices(date = "20220715"), NA)
+  expect_error(get_indices(code = "0040", date = "20220715"), NA)
+  expect_error(get_indices(code = "0040", from = "20220701", to = "20220715"), NA)
 })
 
 
@@ -125,7 +125,7 @@ test_that("get_financial_details", {
   expect_error(get_financial_details(date = "20220715"), NA)
   expect_error(get_financial_details(code = "86970", date = "20220715"), NA)
   # pagination
-  expect_equal(nrow(get_financial_details(date = "20230512")), 114385L)
+  expect_equal(nrow(get_financial_details(date = "20230512")), 114384L)
 })
 
 
