@@ -10,7 +10,7 @@ JQuantsRは、J-QuantsをRから扱いやすいようにラップしたRパッ�
 
 ## インストール
 
-以下の通り、本リポジトリからインストールしてください。インストールには4.1.0以上のバージョンのRが必要です。
+インストールには4.1.0以上のバージョンのRが必要です。
 
 ``` r
 install.packages("remotes")
@@ -19,7 +19,7 @@ remotes::install_github("J-Quants/JQuantsR")
 
 ## サンプルコード
 
-[J-Quants](https://jpx-jquants.com/)よりユーザー登録を行ってください。
+事前に[J-Quants](https://jpx-jquants.com/)よりユーザー登録を行ってください。
 
 ``` r
 library(JQuantsR)
@@ -29,7 +29,7 @@ authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")
 get_daily_quotes(code = "86970")
 ```
 
-日付の範囲を指定して取得することができない株価四本値のようなエンドポイントからデータを一括で取得したい場合は、`for`ループや`purrr::map`などを利用してください。
+なお、日付の範囲を指定して取得することができない株価四本値のようなエンドポイントからデータを一括で取得したい場合は、`for`ループや`purrr::map`などを利用してください。
 
 ``` r
 library(purrr)
@@ -63,43 +63,43 @@ Reference](https://jpx.gitbook.io/j-quants-ja/api-reference)をご参照くだ�
     メールアドレスとパスワードを用いてリフレッシュトークンを取得後、リフレッシュトークンを用いてIDトークンを取得する
     - \[POST\] /token/auth_user
     - \[POST\] /token/auth_refresh
-  - `get_info()`: 上場銘柄一覧を取得する
+  - `get_info()`: 上場銘柄一覧
     - \[GET\] /listed/info
-  - `get_daily_quotes()`: 株価四本値を取得する
+  - `get_daily_quotes()`: 株価四本値
     - \[GET\] /prices/daily_quotes
-  - `get_financial_statements()`: 決算情報を取得する
+  - `get_financial_statements()`: 財務情報
     - \[GET\] /fins/statements
   - `get_financial_announcement()`:
-    3月期・9月期決算会社の翌営業日の決算発表予定銘柄を取得する
+    3月期・9月期決算会社の翌営業日の決算発表予定銘柄
     - \[GET\] /fins/annoucement
-  - `get_trading_calendar()`: 取引カレンダーを取得する
+  - `get_trading_calendar()`: 取引カレンダー
     - \[GET\] /markets/trading_calendar
 - Lightプラン以上
-  - `get_trades_spec()`: 投資部門別売買状況（金額）を取得する
+  - `get_trades_spec()`: 投資部門別売買状況（金額）
     - \[GET\] /markets/trades_spec
-  - `get_topix()`: TOPIX四本値を取得する
+  - `get_topix()`: TOPIX四本値
     - \[GET\] /indices/topix
 - Standardプラン以上
-  - `get_indices()`: 指数四本値を取得する
+  - `get_indices()`: 指数四本値
     - \[GET\] /indices
-  - `get_index_option()`:日経225オプション四本値を取得する
+  - `get_index_option()`:日経225オプション四本値
     - \[GET\] /option/index_option
-  - `get_weekly_margin_interest()`: 信用取引週末残高を取得する
+  - `get_weekly_margin_interest()`: 信用取引週末残高
     - \[GET\] /markets/weekly_margin_interest
-  - `get_short_selling()`: 業種別空売り比率を取得する
+  - `get_short_selling()`: 業種別空売り比率
     - \[GET\] /markets/short_selling
 - Premiumプラン以上
-  - `get_breakdown()`: 売買内訳データを取得する
+  - `get_breakdown()`: 売買内訳データ
     - \[GET\] /markets/breakdown
-  - `get_prices_am()`: 前場終了時に前場の株価を取得する
+  - `get_prices_am()`: 前場の株価（前場終了時）
     - \[GET\] /prices/prices_am
-  - `get_financial_dividend()`: 配当金情報を取得する
+  - `get_financial_dividend()`: 配当金情報
     - \[GET\] /fins/dividend
-  - `get_financial_details()`: 財務諸表（BS/PL）を取得する
+  - `get_financial_details()`: 財務諸表
     - \[GET\] /fins/fs_details
-  - `get_futures()`: 先物四本値を取得する
+  - `get_futures()`: 先物四本値
     - \[GET\] /derivatives/futures
-  - `get_options()`: オプション四本値を取得する
+  - `get_options()`: オプション四本値
     - \[GET\] /derivatives/options
 
 ### `JQuantsR::authorize()`
