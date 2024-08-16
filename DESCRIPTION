@@ -1,7 +1,7 @@
 Package: JQuantsR
 Type: Package
 Title: Get Japanese Stock Data From J-Quants API
-Version: 1.4.0
+Version: 1.4.1
 Author@R: person("J-Quants", role = c("aut", "cre"), email = "j-quants@jpx.co.jp")
 Description: Get Japanese stock market data from J-Quants API, which is published from Japan Exchange Group, Inc. (JPX).
 Depends: R (>= 4.1.0)

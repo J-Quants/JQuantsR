@@ -61,7 +61,7 @@ get_full_data <- function(resource_path, query, key_name, id_token) {
   data <- data |>
     purrr::modify_tree(leaf = \(x) {ifelse(is.null(x), NA, x)})
 
-  if (key_name == "fs_details" & length(data) > 1L) {
+  if (key_name == "fs_details" & length(data) >= 1L) {
     res <- data |>
       dplyr::bind_rows() |>
       dplyr::mutate(
