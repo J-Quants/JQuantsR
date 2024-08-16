@@ -105,7 +105,7 @@ get_info <- function(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
     date <- NULL
   }
   query <- list(code = code, date = date)
-  get_full_data("/listed/info", query, "info", "pagination_key", FALSE, id_token)
+  get_full_data("/listed/info", query, "info", id_token)
 }
 
 #' @rdname get_info
@@ -124,7 +124,7 @@ get_daily_quotes <- function(code, from, to, date, id_token = Sys.getenv("JQUANT
     date <- NULL
   }
   query <- list(code = code, from = from, to = to, date = date)
-  get_full_data("/prices/daily_quotes", query, "daily_quotes", "pagination_key", TRUE, id_token)
+  get_full_data("/prices/daily_quotes", query, "daily_quotes", id_token)
 }
 
 #' @rdname get_info
@@ -134,7 +134,7 @@ get_prices_am <- function(code, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
     code <- NULL
   }
   query <- list(code = code)
-  get_full_data("/prices/prices_am", query, "prices_am", "pagination_key", TRUE, id_token)
+  get_full_data("/prices/prices_am", query, "prices_am", id_token)
 }
 
 #' @rdname get_info
@@ -150,7 +150,7 @@ get_trades_spec <- function(section, from, to, id_token = Sys.getenv("JQUANTSR_I
     to <- NULL
   }
   query <- list(section = section, from = from, to = to)
-  get_full_data("/markets/trades_spec", query, "trades_spec", "pagination_key", TRUE, id_token)
+  get_full_data("/markets/trades_spec", query, "trades_spec", id_token)
 }
 
 #' @rdname get_info
@@ -169,7 +169,7 @@ get_weekly_margin_interest <- function(code, from, to, date, id_token = Sys.gete
     date <- NULL
   }
   query <- list(code = code, from = from, to = to, date = date)
-  get_full_data("/markets/weekly_margin_interest", query, "weekly_margin_interest", "pagination_key", TRUE, id_token)
+  get_full_data("/markets/weekly_margin_interest", query, "weekly_margin_interest", id_token)
 }
 
 #' @rdname get_info
@@ -188,7 +188,7 @@ get_short_selling <- function(sector33code, from, to, date, id_token = Sys.geten
     date <- NULL
   }
   query <- list(sector33code = sector33code, from = from, to = to, date = date)
-  get_full_data("/markets/short_selling", query, "short_selling", "pagination_key", TRUE, id_token)
+  get_full_data("/markets/short_selling", query, "short_selling", id_token)
 }
 
 #' @rdname get_info
@@ -207,7 +207,7 @@ get_breakdown <- function(code, from, to, date, id_token = Sys.getenv("JQUANTSR_
     date <- NULL
   }
   query <- list(code = code, from = from, to = to, date = date)
-  get_full_data("/markets/breakdown", query, "breakdown", "pagination_key", TRUE, id_token)
+  get_full_data("/markets/breakdown", query, "breakdown", id_token)
 }
 
 #' @rdname get_info
@@ -223,7 +223,7 @@ get_trading_calendar <- function(holidaydivision, from, to, id_token = Sys.geten
     to <- NULL
   }
   query <- list(holidaydivision = holidaydivision, from = from, to = to)
-  get_full_data("/markets/trading_calendar", query, "trading_calendar", "pagination_key", FALSE, id_token)
+  get_full_data("/markets/trading_calendar", query, "trading_calendar", id_token)
 }
 
 #' @rdname get_info
@@ -242,7 +242,7 @@ get_indices <- function(code, from, to, date, id_token = Sys.getenv("JQUANTSR_ID
     date <- NULL
   }
   query <- list(code = code, from = from, to = to, date = date)
-  get_full_data("/indices", query, "indices", "pagination_key", TRUE, id_token)
+  get_full_data("/indices", query, "indices", id_token)
 }
 
 #' @rdname get_info
@@ -255,7 +255,7 @@ get_topix <- function(from, to, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
     to <- NULL
   }
   query <- list(from = from, to = to)
-  get_full_data("/indices/topix", query, "topix", "pagination_key", TRUE, id_token)
+  get_full_data("/indices/topix", query, "topix", id_token)
 }
 
 #' @rdname get_info
@@ -268,7 +268,7 @@ get_financial_statements <- function(code, date, id_token = Sys.getenv("JQUANTSR
     date <- NULL
   }
   query <- list(code = code, date = date)
-  get_full_data("/fins/statements", query, "statements", "pagination_key", TRUE, id_token)
+  get_full_data("/fins/statements", query, "statements", id_token)
 }
 
 #' @rdname get_info
@@ -281,7 +281,7 @@ get_financial_details <- function(code, date, id_token = Sys.getenv("JQUANTSR_ID
     date <- NULL
   }
   query <- list(code = code, date = date)
-  get_full_data("/fins/fs_details", query, "fs_details", "pagination_key", TRUE, id_token)
+  get_full_data("/fins/fs_details", query, "fs_details", id_token)
 }
 
 #' @rdname get_info
@@ -300,14 +300,14 @@ get_financial_dividend <- function(code, from, to, date, id_token = Sys.getenv("
     date <- NULL
   }
   query <- list(code = code, from = from, to = to, date = date)
-  get_full_data("/fins/dividend", query, "dividend", "pagination_key", TRUE, id_token)
+  get_full_data("/fins/dividend", query, "dividend", id_token)
 }
 
 #' @rdname get_info
 #' @export
 get_financial_announcement <- function(id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
   query <- NULL
-  get_full_data("/fins/announcement", query, "announcement", "pagination_key", TRUE, id_token)
+  get_full_data("/fins/announcement", query, "announcement", id_token)
 }
 
 #' @rdname get_info
@@ -317,7 +317,7 @@ get_index_option <- function(date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
     date <- NULL
   }
   query <- list(date = date)
-  get_full_data("/option/index_option", query, "index_option", "pagination_key", TRUE, id_token)
+  get_full_data("/option/index_option", query, "index_option", id_token)
 }
 
 #' @rdname get_info
@@ -333,7 +333,7 @@ get_futures <- function(category, date, contract_flag, id_token = Sys.getenv("JQ
     contract_flag <- NULL
   }
   query <- list(category = category, date = date, contract_flag = contract_flag)
-  get_full_data("/derivatives/futures", query, "futures", "pagination_key", TRUE, id_token)
+  get_full_data("/derivatives/futures", query, "futures", id_token)
 }
 
 #' @rdname get_info
@@ -352,5 +352,5 @@ get_options <- function(category, code, date, contract_flag, id_token = Sys.gete
     contract_flag <- NULL
   }
   query <- list(category = category, code = code, date = date, contract_flag = contract_flag)
-  get_full_data("/derivatives/options", query, "options", "pagination_key", TRUE, id_token)
+  get_full_data("/derivatives/options", query, "options", id_token)
 }

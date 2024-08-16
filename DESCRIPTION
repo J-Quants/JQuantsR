@@ -7,13 +7,13 @@ Description: Get Japanese stock market data from J-Quants API, which is publishe
 Depends: R (>= 4.1.0)
 Imports: 
     dplyr (>= 1.0.0),
-    purrr,
+    purrr (>= 1.0.0),
     stringr,
     tibble,
-    magrittr,
     rlang,
     glue,
     httr,
+    curl,
     jsonlite,
     data.table
 Suggests:

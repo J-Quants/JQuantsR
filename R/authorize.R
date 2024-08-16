@@ -36,7 +36,7 @@ authorize_refresh_token <- function(mail_address = Sys.getenv("JQUANTSR_MAIL_ADD
     endpoint,
     times = 3,
     body = jsonlite::toJSON(list(mailaddress = mail_address, password = password), auto_unbox = TRUE),
-    httr::user_agent(default_user_agent())
+    httr::user_agent(get_user_agent())
   )
 
   status_code <- httr::status_code(resp)
@@ -61,7 +61,7 @@ authorize_id_token <- function(refresh_token = Sys.getenv("JQUANTSR_REFRESH_TOKE
     endpoint,
     times = 3,
     query = list(refreshtoken = refresh_token),
-    httr::user_agent(default_user_agent())
+    httr::user_agent(get_user_agent())
   )
 
   status_code <- httr::status_code(resp)
