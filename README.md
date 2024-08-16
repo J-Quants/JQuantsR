@@ -37,12 +37,12 @@ library(purrr)
 start_date <- as.Date("2022-07-01")
 end_date <- as.Date("2022-07-31")
 
-dates <- seq(start_date, end_date, by="1 day") |> 
-  format(format="%Y-%m-%d")
+dates <- seq(start_date, end_date, by = "1 day") |> 
+  format(format = "%Y-%m-%d")
 
 purrr::map_dfr(dates, \(date) {
   print(date)
-  get_daily_quotes(date=date)
+  get_daily_quotes(date = date)
 })
 ```
 
