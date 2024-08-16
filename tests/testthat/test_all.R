@@ -147,3 +147,15 @@ test_that("get_financial_announcement", {
 test_that("get_index_option", {
   expect_error(get_index_option(date = "20220701"), NA)
 })
+
+
+# get_futures ----------------------------------------------
+test_that("get_futures", {
+  expect_error(get_futures(date = "20220701"), NA)
+})
+
+
+# get_options ----------------------------------------------
+test_that("get_options", {
+  expect_error(get_options(date = "20220701"), NA)
+})

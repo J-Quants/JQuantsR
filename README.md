@@ -19,59 +19,31 @@ remotes::install_github("J-Quants/JQuantsR")
 
 ## サンプルコード
 
-JQuantsRを使用する前に、[J-Quants](https://jpx-jquants.com/)よりユーザー登録を行ってください。
+[J-Quants](https://jpx-jquants.com/)よりユーザー登録を行ってください。
 
 ``` r
 library(JQuantsR)
 
-# 各Rセッションの最初にJQuantsR::authorize()を実行してください。
-# Rの環境変数"JQUANTSR_MAIL_ADDRESS"と"JQUANTSR_PASSWORD"に、
-# J-Quants APIに登録しているメールアドレスとパスワードをそれぞれ設定しておくと、
-# JQuantsR::authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")の代わりに
-# JQuantsR::authorize()で実行できます。
+# 各Rセッションの最初にJQuantsR::authorize()を実行してください
 authorize(mail_address = "YOUR MAIL ADDRESS", password = "YOUR PASSWORD")
-
-get_info()
-get_info(code = "86970")
-get_info(date = "20220701")
-
 get_daily_quotes(code = "86970")
-get_daily_quotes(date = "20220701")
+```
 
-get_prices_am()
+日付の範囲を指定して取得することができない株価四本値のようなエンドポイントからデータを一括で取得したい場合は、`for`ループや`purrr::map`などを利用してください。
 
-get_trades_spec()
-get_trades_spec(section = "TSEPrime")
-get_trades_spec(from = "20220101", to = "20220630")
+``` r
+library(purrr)
 
-get_weekly_margin_interest(code = "86970")
-get_weekly_margin_interest(date = "20220701")
+start_date <- as.Date("2022-07-01")
+end_date <- as.Date("2022-07-31")
 
-get_short_selling(sector33code = "0050")
-get_short_selling(date = "20220701")
+dates <- seq(start_date, end_date, by="1 day") |> 
+  format(format="%Y-%m-%d")
 
-get_breakdown(code = "86970")
-get_breakdown(date = "20220701")
-
-get_trading_calendar()
-
-get_indices(code = "0000")
-get_indices(date = "20220701")
-
-get_topix()
-
-get_financial_statements(code = "86970")
-get_financial_statements(date = "20220105")
-
-get_financial_details(code = "86970")
-get_financial_details(date = "20220127")
-
-get_financial_dividend(code = "86970")
-get_financial_dividend(date = "20220701")
-
-get_financial_annoucement()
-
-get_index_option(date = "20220701")
+purrr::map_dfr(dates, \(date) {
+  print(date)
+  get_daily_quotes(date=date)
+})
 ```
 
 ## 各関数について
@@ -110,7 +82,7 @@ Reference](https://jpx.gitbook.io/j-quants-ja/api-reference)をご参照くだ�
 - Standardプラン以上
   - `get_indices()`: 指数四本値を取得する
     - \[GET\] /indices
-  - `get_index_option()`: オプション四本値を取得する
+  - `get_index_option()`:日経225オプション四本値を取得する
     - \[GET\] /option/index_option
   - `get_weekly_margin_interest()`: 信用取引週末残高を取得する
     - \[GET\] /markets/weekly_margin_interest
@@ -125,16 +97,19 @@ Reference](https://jpx.gitbook.io/j-quants-ja/api-reference)をご参照くだ�
     - \[GET\] /fins/dividend
   - `get_financial_details()`: 財務諸表（BS/PL）を取得する
     - \[GET\] /fins/fs_details
+  - `get_futures()`: 先物四本値を取得する
+    - \[GET\] /derivatives/futures
+  - `get_options()`: オプション四本値を取得する
+    - \[GET\] /derivatives/options
 
 ### `JQuantsR::authorize()`
 
 - 各Rセッションにおいて、最初に`JQuantsR::authorize()`を実行してリフレッシュトークンとIDトークンを取得する必要があります。
   - `JQuantsR::authorize()`は、リフレッシュトークンとIDトークンを取得し、`JQUANTSR_REFRESH_TOKEN`と`JQUANTSR_ID_TOKEN`という変数名の環境変数にそれぞれリフレッシュトークンとIDトークンをセットします。
-  - 各Rセッション内で一度`JQuantsR::authorize()`を実行すれば、`id_token`を引数に取る各関数にIDトークンを渡す必要はありません。
+- 各Rセッション内で一度`JQuantsR::authorize()`を実行すれば、`id_token`を引数に取る各関数にIDトークンを渡す必要はありません。
 - メールアドレスとパスワードをそれぞれ`JQUANTSR_MAIL_ADDRESS`と`JQUANTSR_PASSWORD`という変数名の環境変数に設定すれば、`JQuantsR::authorize()`の引数`mail_address`と`password`にそれぞれメールアドレスとパスワードを指定する必要はありません。
   - `.Renviron`ファイルに`JQUANTSR_MAIL_ADDRESS`と`JQUANTSR_PASSWORD`を記載することを推奨します。
-- リフレッシュトークンとIDトークンの有効期限はそれぞれ1週間、24時間です。
-  - いずれかの有効期限が切れた場合、`JQuantsR::authorize()`を再度実行してください。
+- リフレッシュトークンとIDトークンの有効期限はそれぞれ1週間、24時間です。いずれかの有効期限が切れた場合、`JQuantsR::authorize()`を再度実行してください。
 
 ## その他
 

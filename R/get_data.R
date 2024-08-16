@@ -9,6 +9,10 @@
 #' @param from a string the start date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.
 #' @param to a string the end date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.
 #' @param date a string the date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.
+#' @param section a string the name of stock division.
+#' @param sector33code a string the name of 33 sector code.
+#' @param holidaydivision a string holiday division.
+#' @param category a string futures and options category name.
 #' @param id_token a string your id_token.
 #' @return if successfully fetched data (= status code of the API is 200), a tibble of the fetched data.
 #' if not successfully (= status code of the API is not 200), message from the API is printed.
@@ -87,6 +91,10 @@
 #' get_financial_announcement()
 #'
 #' get_index_option(date = "20220701")
+#'
+#' get_futures(date = "20220701", contract_flag = "1")
+#'
+#' get_options(date = "20220701", contract_flag = "1")
 #' }
 #' @export
 get_info <- function(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
@@ -304,10 +312,45 @@ get_financial_announcement <- function(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"
 
 #' @rdname get_info
 #' @export
-get_index_option <- function(date = date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+get_index_option <- function(date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
   if (rlang::is_missing(date)) {
     date <- NULL
   }
   query <- list(date = date)
   get_full_data("/option/index_option", query, "index_option", "pagination_key", TRUE, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_futures <- function(category, date, contract_flag, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(category)) {
+    category <- NULL
+  }
+  if (rlang::is_missing(date)) {
+    date <- NULL
+  }
+  if (rlang::is_missing(contract_flag)) {
+    contract_flag <- NULL
+  }
+  query <- list(category = category, date = date, contract_flag = contract_flag)
+  get_full_data("/derivatives/futures", query, "futures", "pagination_key", TRUE, id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_options <- function(category, code, date, contract_flag, id_token = Sys.getenv("JQUANTSR_ID_TOKEN")) {
+  if (rlang::is_missing(category)) {
+    category <- NULL
+  }
+  if (rlang::is_missing(code)) {
+    code <- NULL
+  }
+  if (rlang::is_missing(date)) {
+    date <- NULL
+  }
+  if (rlang::is_missing(contract_flag)) {
+    contract_flag <- NULL
+  }
+  query <- list(category = category, code = code, date = date, contract_flag = contract_flag)
+  get_full_data("/derivatives/options", query, "options", "pagination_key", TRUE, id_token)
 }
