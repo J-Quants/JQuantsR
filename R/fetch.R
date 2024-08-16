@@ -18,7 +18,7 @@ fetch <- function(resource_path, query, id_token) {
     times = 3,
     query = query,
     httr::add_headers(Authorization = as.character(glue::glue("Bearer {id_token}"))),
-    httr::user_agent(USER_AGENT)
+    httr::user_agent(get_user_agent())
   )
 
   status_code <- httr::status_code(resp)
@@ -89,6 +89,6 @@ get_user_agent <- function() {
     JQuantsR = as.character(utils::packageVersion("JQuantsR")),
     R = stringr::str_extract(R.version.string, "[0-9]+\\.[0-9]+\\.[0-9]+")
   )
-  default_user_agent <- paste0(names(versions), "/", versions, collapse = " ")
-  return(default_user_agent)
+  user_agent <- paste0(names(versions), "/", versions, collapse = " ")
+  return(user_agent)
 }
