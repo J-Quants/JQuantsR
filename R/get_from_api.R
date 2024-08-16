@@ -93,8 +93,8 @@ get_full_data <- function(resource_path, query, data_key_name, pagination_key_na
   if (!is_paginationable) {
     content <- get_from_api(resource_path, query, id_token)
     extracted_content <- extract_from_content(content, data_key_name, pagination_key_name)
-    data <- extracted_content[["data"]]
-    return(data)
+    res <- extracted_content[["data"]]
+    return(res)
   }
   else {
     data <- list()
@@ -103,17 +103,16 @@ get_full_data <- function(resource_path, query, data_key_name, pagination_key_na
       content <- get_from_api(resource_path, query, id_token)
       extracted_content <- extract_from_content(content, data_key_name, pagination_key_name)
 
-      data_tmp <- extracted_content[["data"]]
-      pagination_key_tmp <- extracted_content[["pagination_key"]]
-      data <- c(data, list(data_tmp))
+      pagination_key <- extracted_content[["pagination_key"]]
+      data <- c(data, list(extracted_content[["data"]]))
 
-      if (is.null(pagination_key_tmp)) {
+      if (is.null(pagination_key)) {
         break
       }
-      query[["pagination_key"]] <- pagination_key_tmp
-      rlang::inform(glue::glue("continue to next pagination: pagination_key={pagination_key_tmp}"))
+      query[["pagination_key"]] <- pagination_key
+      rlang::inform(glue::glue("continue to next pagination: pagination_key={pagination_key}"))
     }
-    data <- dplyr::bind_rows(data)
-    return(data)
+    res <- do.call(rbind, data)
+    return(res)
   }
 }

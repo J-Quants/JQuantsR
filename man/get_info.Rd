@@ -16,6 +16,8 @@
 \alias{get_financial_dividend}
 \alias{get_financial_announcement}
 \alias{get_index_option}
+\alias{get_futures}
+\alias{get_options}
 \title{Get data from J-Quants API}
 \usage{
 get_info(code, date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
@@ -79,7 +81,22 @@ get_financial_dividend(
 
 get_financial_announcement(id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 
-get_index_option(date = date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+get_index_option(date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
+
+get_futures(
+  category,
+  date,
+  contract_flag,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
+
+get_options(
+  category,
+  code,
+  date,
+  contract_flag,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
 }
 \arguments{
 \item{code}{a string stock code.}
@@ -91,6 +108,14 @@ get_index_option(date = date, id_token = Sys.getenv("JQUANTSR_ID_TOKEN"))
 \item{from}{a string the start date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.}
 
 \item{to}{a string the end date of data. "\%Y\%m\%d" and "\%Y-\%m-\%d" formats are valid.}
+
+\item{section}{a string the name of stock division.}
+
+\item{sector33code}{a string the name of 33 sector code.}
+
+\item{holidaydivision}{a string holiday division.}
+
+\item{category}{a string futures and options category name.}
 }
 \value{
 if successfully fetched data (= status code of the API is 200), a tibble of the fetched data.
@@ -176,5 +201,9 @@ get_financial_dividend(code = "86970", from = "20220101", to = "20220630")
 get_financial_announcement()
 
 get_index_option(date = "20220701")
+
+get_futures(date = "20220701", contract_flag = "1")
+
+get_options(date = "20220701", contract_flag = "1")
 }
 }
