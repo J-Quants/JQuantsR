@@ -56,6 +56,8 @@
 #' get_short_selling(date = "20220701")
 #' get_short_selling(sector33code = "0050", from = "20220101", to = "20220630")
 #'
+#' get_short_selling_positions(code = "86970")
+#'
 #' get_breakdown(code = "86970")
 #' get_breakdown(date = "20220701")
 #' get_breakdown(code = "86970", from = "20220101", to = "20220630")
@@ -189,6 +191,41 @@ get_short_selling <- function(sector33code, from, to, date, id_token = Sys.geten
   }
   query <- list(sector33code = sector33code, from = from, to = to, date = date)
   get_full_data("/markets/short_selling", query, "short_selling", id_token)
+}
+
+#' @rdname get_info
+#' @export
+get_short_selling_positions <- function(
+    code,
+    disclosed_date,
+    disclosed_date_from,
+    disclosed_date_to,
+    calculated_date,
+    id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+  ) {
+  if (rlang::is_missing(code)) {
+    code <- NULL
+  }
+  if (rlang::is_missing(disclosed_date)) {
+    disclosed_date <- NULL
+  }
+  if (rlang::is_missing(disclosed_date_from)) {
+    disclosed_date_from <- NULL
+  }
+  if (rlang::is_missing(disclosed_date_to)) {
+    disclosed_date_to <- NULL
+  }
+  if (rlang::is_missing(calculated_date)) {
+    calculated_date <- NULL
+  }
+  query <- list(
+    code = code,
+    disclosed_date = disclosed_date,
+    disclosed_date_from = disclosed_date_from,
+    disclosed_date_to = disclosed_date_to,
+    calculated_date = calculated_date
+  )
+  get_full_data("/markets/short_selling_positions", query, "short_selling_positions", id_token)
 }
 
 #' @rdname get_info

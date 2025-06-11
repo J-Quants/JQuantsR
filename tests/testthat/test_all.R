@@ -63,6 +63,16 @@ test_that("get_short_selling", {
   expect_error(get_short_selling(sector33code = "0050", from = "20220101", to = "20220630"), NA)
 })
 
+# get_short_selling_positions ---------------------------------------------------------------
+test_that("get_short_selling_positions", {
+  expect_error(get_short_selling_positions(code = "86970"), NA)
+  expect_error(get_short_selling_positions(code = "86970", disclosed_date = "20250529"), NA)
+  expect_error(get_short_selling_positions(code = "86970", disclosed_date_from = "20220101", disclosed_date_to = "20220630"), NA)
+  expect_error(get_short_selling_positions(code = "86970", calculated_date = "20250528"), NA)
+  expect_error(get_short_selling_positions(disclosed_date = "20250529"), NA)
+  expect_error(get_short_selling_positions(calculated_date = "20250528"), NA)
+})
+
 # get_breakdown ---------------------------------------------------------------
 test_that("get_breakdown", {
   expect_error(get_breakdown(code = "86970"), NA)
