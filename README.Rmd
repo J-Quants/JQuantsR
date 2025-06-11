@@ -105,6 +105,8 @@ purrr::map_dfr(dates, \(date) {
     - [GET] /markets/weekly_margin_interest
   - `get_short_selling()`: 業種別空売り比率
     - [GET] /markets/short_selling
+  - `get_short_selling_positions()`: 空売り残高報告
+    - [GET] /markets/short_selling_positions
 - Premiumプラン以上
   - `get_breakdown()`: 売買内訳データ
     - [GET] /markets/breakdown

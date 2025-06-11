@@ -7,6 +7,7 @@
 \alias{get_trades_spec}
 \alias{get_weekly_margin_interest}
 \alias{get_short_selling}
+\alias{get_short_selling_positions}
 \alias{get_breakdown}
 \alias{get_trading_calendar}
 \alias{get_indices}
@@ -47,6 +48,15 @@ get_short_selling(
   from,
   to,
   date,
+  id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
+)
+
+get_short_selling_positions(
+  code,
+  disclosed_date,
+  disclosed_date_from,
+  disclosed_date_to,
+  calculated_date,
   id_token = Sys.getenv("JQUANTSR_ID_TOKEN")
 )
 
@@ -165,6 +175,8 @@ get_weekly_margin_interest(code = "86970", from = "20220101", to = "20220630")
 get_short_selling(sector33code = "0050")
 get_short_selling(date = "20220701")
 get_short_selling(sector33code = "0050", from = "20220101", to = "20220630")
+
+get_short_selling_positions(code = "86970")
 
 get_breakdown(code = "86970")
 get_breakdown(date = "20220701")
